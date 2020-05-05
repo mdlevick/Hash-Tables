@@ -1,14 +1,25 @@
+import sys
+sys.path.append('../../hashtable')
+from hashtable import HashTable
+
 import math
 import random
 
-def slowfun(x, y):
-    # TODO: Modify to produce the same results, but much faster
-    v = math.pow(x, y)
-    v = math.factorial(v)
-    v //= (x + y)
-    v %= 982451653
+slowfun_table = HashTable()
 
-    return v
+def slowfun(x, y):
+    r = slowfun_table.get(str((x, y)))
+    if r is None:
+      v = math.pow(x, y)
+      v = math.factorial(v)
+      v //= (x + y)
+      v %= 982451653
+
+      slowfun_table.put(str((x, y)), v)
+
+      return v
+
+    return r
 
 
 # Do not modify below this line!
