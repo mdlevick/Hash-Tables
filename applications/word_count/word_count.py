@@ -1,5 +1,13 @@
+from collections import Counter
+import re
+
 def word_count(s):
-    # Implement me.
+    c = Counter()
+    for w in re.split("\s", s):
+        if w not in '":;,.-+=/\\|[]{}()*^&':
+            c[w.lower().strip('":;,.-+=/\\|[]{}()*^&')] += 1
+
+    return dict(c)
 
 
 if __name__ == "__main__":
